@@ -1,0 +1,30 @@
+.App {
+  h1 {
+    border: 1px solid red;
+    display: block;
+    width: 100%;
+  }
+  text-align: center;
+  border: 1px solid black;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  .choice {
+    border: 1px solid green;
+    margin: auto;
+    width: 40%;
+    height: 30vh;
+    img {
+      border: 1px outset black;
+      border-radius: 25%;
+      box-shadow: 2px 2px 2px 2px black;
+      height: 20vh;
+      margin: 6%;
+      width: 20%;
+    }
+    .paper {
+      transform: rotate(-90deg);
+    }
+  }
+}
