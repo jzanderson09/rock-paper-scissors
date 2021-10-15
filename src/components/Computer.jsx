@@ -6,15 +6,14 @@ const Computer = props => {
             <div className='player computer'>
                 <h3>Computer!</h3>
                 <img 
-                    id='computer-choice'
                     src={props.choice.src} 
-                    alt={`computer ${props.choice.name}`} />
+                    alt={`computer: ${props.choice.name}`} />
             </div>
         );
     }
     else {
         return (
-            <div className='player loading'>
+            <div className='player computer'>
                 <p>Loading...</p>
             </div>
         );

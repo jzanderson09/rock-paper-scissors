@@ -1,16 +1,31 @@
+// Mixins [may add to own file later]:
+@mixin rounded-shadow-borders {
+  border: 2px outset black;
+  border-radius: 10%;
+  box-shadow: 2px 2px 2px 2px black;
+}
+
+@mixin cancel-rounded-shadow-borders {
+  border: none;
+  border-radius: none;
+  box-shadow: none;
+}
+
 * {
   box-sizing: border-box;
 }
 
 .App {
-  h1 {
-    border: 1px solid red;
-    display: block;
-    width: 100%;
-  }
   text-align: center;
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
   align-items: center;
+  @include rounded-shadow-borders();
+  h1 {
+    border: 1px solid red;
+    display: block;
+    width: 80%;
+    @include rounded-shadow-borders();
+  }
 }
