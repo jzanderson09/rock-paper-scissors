@@ -30,38 +30,65 @@ class Game extends Component {
             winner: ''
         };
         this.advanceRound = this.advanceRound.bind(this);
+        this.computerChoose = this.computerChoose.bind(this);
         this.determineMatchWinner = this.determineMatchWinner.bind(this);
         this.startPlay = this.startPlay.bind(this);
         this.userChoose = this.userChoose.bind(this);
     }
 
     componentDidMount() {
-        const computerPick = Math.floor(Math.random() * 3);
+        const computerChoice = this.computerChoose();
+        let maxRounds = 1;
+        let result = window.prompt('How many rounds would you like to play?', 1);
+        if (result === null) {
+            result = 1;
+        }
+        maxRounds = result;
+        console.log(maxRounds);
         this.setState({
-            computerChoice: {...this.state.choices[computerPick]},
+            computerChoice,
             computerScore: 0,
             currentRound: 1,
+            maxRounds: parseInt(maxRounds),
             play: false,
+            userChoice: {},
+            userScore: 0
         });
     }
 
     // If final round, determines/returns match winner.  If not, round is incremented:
     advanceRound() {
-        if (this.state.currentRound === this.state.maxRounds) {
-            const matchWinner = this.determineMatchWinner();
-            window.alert(`Match Winner: ${matchWinner.toLocaleUpperCase()}  Thanks for playing!`);
-            this.setState({ 
-                computerChoice: {},
-                computerScore: 0,
-                currentRound: 1,
-                userChoice: {},
-                userScore: 0
-            });
+        if (this.state.currentRound >= this.state.maxRounds) {
+            const winner = this.determineMatchWinner();
+            if (winner === 'tie') {
+                const tiedScore = this.state.computerScore;
+                window.alert(`Both players tie the match with ${tiedScore} point(s)! Thank you for playing!`);
+            }
+            else {
+                if (winner === 'computer') {
+                    window.alert(`The ${winner} won the match with ${this.state.computerScore} point(s)!  Thank you for playing!`);
+                }
+                else if (winner === 'user') {
+                    window.alert(`The ${winner} won the match with ${this.state.userScore} point(s)!  Thank you for playing!`);
+                }
+            }
             this.componentDidMount();
         }
         else {
-            this.setState({ currentRound: this.state.currentRound + 1 });
+            const nextComputerChoice = this.computerChoose();
+            this.setState({
+                currentRound: this.state.currentRound + 1,
+                computerChoice: nextComputerChoice,
+                play: false,
+                userChoice: {}
+            });
         }
+    }
+
+    // Returns random R/P/S choice:
+    computerChoose() {
+        const computerChoice = Math.floor(Math.random() * 3);
+        return this.state.choices[computerChoice];
     }
 
     // Determines and returns match winner upon final round:
@@ -85,12 +112,14 @@ class Game extends Component {
         const user = this.state.userChoice.name;
         const winner = evaluate(computer, user);
         if (winner === 'tie') {
-            window.alert(`It's a tie! Both players picked ${computer}`);
+            window.alert(`It's a tie! Both players picked ${computer}!`);
         }
         else if (winner === 'computer') {
+            window.alert(`The ${winner} won the round!`);
             this.setState({ computerScore: this.state.computerScore + 1 });
         }
         else {
+            window.alert(`The ${winner} won the round!`);
             this.setState({ userScore: this.state.userScore + 1 });
         }
         this.advanceRound();
@@ -104,7 +133,7 @@ class Game extends Component {
                 userChoice: {...choice},
                 play: true
             });
-            setTimeout(() => this.startPlay(), 2500);
+            setTimeout(() => this.startPlay(), 2000);
         }
     }
 
