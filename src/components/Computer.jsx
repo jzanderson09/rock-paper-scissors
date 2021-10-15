@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Computer = props => {
-    if (props.choice) {
+    if (props.play) {
         return (
             <div className='player'>
                 <h3>Computer!</h3>
