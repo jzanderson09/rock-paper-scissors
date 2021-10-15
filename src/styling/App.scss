@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 .App {
   h1 {
     border: 1px solid red;
@@ -10,26 +14,4 @@
   flex-flow: row wrap;
   justify-content: center;
   align-items: center;
-  .choice {
-    border: 1px solid green;
-    margin: auto;
-    width: 40%;
-    height: 30vh;
-    img {
-      border: 1px outset black;
-      border-radius: 25%;
-      box-shadow: 2px 2px 2px 2px black;
-      height: 20vh;
-      margin: 6%;
-      width: 20%;
-    }
-    .paper {
-      transform: rotate(-90deg);
-    }
-  }
-  .player {
-    border: 1px solid green;
-    margin: 5%;
-    padding: 5%;
-  }
 }
