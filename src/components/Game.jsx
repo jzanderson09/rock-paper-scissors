@@ -11,14 +11,27 @@ class Game extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            choiceImgs: [],
+            choices: [],
             computerChoice: null
         };
     }
 
     componentDidMount() {
         this.setState({ 
-            choiceImgs: [rock, paper, scissors],
+            choices: [
+                {
+                    name: 'rock',
+                    src: rock
+                },
+                {
+                    name: 'paper',
+                    src: paper
+                }, 
+                {
+                    name: 'scissors',
+                    src: scissors
+                }
+            ],
             computerChoice: Math.floor(Math.random() * 3)
         });
     }
@@ -26,7 +39,7 @@ class Game extends Component {
     render() {
         return (
             <div className='game'>
-                <Computer choice={this.state.choiceImgs[this.state.computerChoice]} />
+                <Computer choice={this.state.choices[this.state.computerChoice]} />
                 <User />
             </div>
         );
