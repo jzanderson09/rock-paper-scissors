@@ -1,9 +1,20 @@
 import React from 'react';
 
 const User = props => {
-    if (props.userChoice === null) {
+    if (props.play) {
         return (
-            <div className='player user'>
+            <div className='player'>
+                <h3>User!</h3>
+                <img
+                    src={props.userChoice.src} 
+                    alt={`user: ${props.userChoice.name}`} />
+            </div>
+        );
+    }
+    else {
+        return (
+            <div 
+                className='player user'>
                 <h3>User!</h3>
                 <input 
                     className="choice-btn"
@@ -23,17 +34,6 @@ const User = props => {
             </div>
         );
     }
-    else {
-        return (
-            <div className='player'>
-                <h3>User!</h3>
-                <img 
-                    src={props.userChoice.src} 
-                    alt={`user: ${props.userChoice.name}`} />
-            </div>
-        );
-    }
-
 };
 
 export default User;
