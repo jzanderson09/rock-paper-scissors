@@ -1,7 +1,7 @@
 @import '../styling/App.scss';
 
 .game {
-    background-color: $game-background;
+    background: $game-background;
     height: 80vh;
     width: 80%;
     margin: 0 auto 5%;
@@ -11,7 +11,7 @@
     align-items: center;
     @include rounded-shadow-borders($main-color, $main-px, $main-percent);
     .scoreboard {
-        background-color: $app-background;
+        background: $app-background;
         display: flex;
         flex-flow: row nowrap;
         justify-content: space-evenly;
@@ -20,7 +20,7 @@
         @include rounded-shadow-borders($main-color, $main-px, $main-percent);
     }
     .player {
-        background-color: $app-background;
+        background: $app-background;
         width: 35%;
         height: 40vh;
         padding: 0;
@@ -52,8 +52,7 @@
             width: 35%;
             height: 28%;
             font-size: 1rem;
-            color: white;
-            background-color: black;
+            @include buttonize($choose-button-background, $choose-button-foreground);
             @include textShadows(1px, whitesmoke);
             @include rounded-shadow-borders($main-color, $main-px, $main-percent);
         }
@@ -64,9 +63,9 @@
         .next-match {
             width: 40%;
             height: 10vh;
-            background: steelblue;
-            color: white;
             font-size: 2rem;
+            @include buttonize($play-button-background, $play-button-foreground);
+            @include textShadows($main-px, $main-color);
             @include rounded-shadow-borders($main-color, $main-px, $main-percent);
         }
     }

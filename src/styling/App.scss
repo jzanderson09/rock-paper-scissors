@@ -9,8 +9,22 @@
   text-shadow: $px $px $px $color;
 }
 
+@mixin buttonize($background, $foreground) {
+  background: $background;
+  color: $foreground;
+  &:hover {
+    background: $foreground;
+    color: $background;
+    cursor: pointer;
+  }
+}
+
 //Variables:
 $app-background: rgba(100, 120, 120, 0.7);
+$choose-button-background: black;
+$choose-button-foreground: whitesmoke;
+$play-button-background: steelblue;
+$play-button-foreground: whitesmoke;
 $game-background: rgba(2, 61, 170, 0.7);
 $main-color: black;
 $main-px: 10px;
@@ -37,7 +51,7 @@ $loading-text: greenyellow;
   align-items: center;
   #app-banner {
     display: block;
-    background-color: $game-background;
+    background: $game-background;
     width: 80%;
     @include rounded-shadow-borders($main-color, $main-px, $main-percent);
   }
