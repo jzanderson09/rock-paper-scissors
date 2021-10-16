@@ -38,7 +38,7 @@ class Game extends Component {
         this.setStartValues();
     }
 
-    // If final round, determines/alerts match winner and resets values.  If not, round is incremented:
+    // 5) If final round, determines/alerts match winner and resets values.  If not, round is incremented:
     advanceRound() {
         if (this.state.currentRound >= this.state.maxRounds) {
             this.finishMatch();
@@ -75,7 +75,7 @@ class Game extends Component {
         }
     }
 
-    // Determines match winner and alerts user:
+    // 6) Determines match winner and alerts user:
     finishMatch() {
         const winner = this.determineMatchWinner();
         if (winner === 'tie') {
@@ -93,7 +93,7 @@ class Game extends Component {
         this.componentDidMount();
     }
 
-    // Sets values for start of new round:
+    // 1)/7) Sets values for start of new round:
     setStartValues() {
         this.setState({
             computerChoice: {},
@@ -107,13 +107,16 @@ class Game extends Component {
         });
     }
 
-    // Picks random computer choice, initializes values and picks x amount of rounds (optional user specified):
+    // 2) Picks random computer choice, initializes values and picks x amount of rounds (optional user specified):
     startNewMatch() {
         let maxRounds = 1;
-        let result = parseInt(window.prompt('How many rounds would you like to play?', 1));
-        if (result === null) {
-            result = 1;
-        }
+        let result;
+        do {
+            result = parseInt(window.prompt(`How many rounds would you like to play? --> Must be a number!`, 1));
+            if (result === null) {
+                result = 1;
+            }
+        } while (isNaN(result));
         maxRounds = result;
         this.setState({
             currentRound: 1,
@@ -122,7 +125,7 @@ class Game extends Component {
         });
     }
 
-    // Evalutes winner, alerts user, increments round:
+    // 3) Evalutes winner, alerts user, increments round:
     startPlay() {
         const computer = this.state.computerChoice.name;
         const user = this.state.userChoice.name;
@@ -131,7 +134,7 @@ class Game extends Component {
         this.advanceRound();
     }
 
-    // Updates scores of roundWinner in state:
+    // 4) Updates scores of roundWinner in state:
     updateScores(roundWinner) {
         if (roundWinner === 'tie') {
             window.alert(`It's a tie! Both players picked ${this.state.computerChoice.name}!`);
@@ -150,7 +153,7 @@ class Game extends Component {
         }
     }
 
-    // Assigns choice to user, starts gameplay:
+    // 2) Assigns choice to user, starts gameplay:
     userChoose(choiceIndex) {
         const choice = this.state.choices[choiceIndex];
         if (window.confirm(`Are you sure you want to pick ${choice.name}?`)) {
@@ -161,7 +164,7 @@ class Game extends Component {
                 play: true,
                 matchOver: false
             });
-            this.timerHandle = setTimeout(() => this.startPlay(), 1500);
+            this.timerHandle = setTimeout(() => this.startPlay(), 2000);
         }
     }
 
