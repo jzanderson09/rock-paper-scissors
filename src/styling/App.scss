@@ -17,6 +17,10 @@
     color: $background;
     cursor: pointer;
   }
+  &:active {
+    background: $select-background;
+    color: $select-color;
+  }
 }
 
 //Variables:
@@ -30,6 +34,8 @@ $main-color: black;
 $main-px: 10px;
 $main-percent: 20%;
 $main-weight: 20%;
+$select-background: rgba(255, 255, 255, 0.3);
+$select-color: rba(0, 0, 0, 0.3); 
 $loading-text: greenyellow;
 
 * {
