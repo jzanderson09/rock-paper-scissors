@@ -225,6 +225,9 @@ class Game extends Component {
                         matchOver={this.state.matchOver}
                         play={this.state.play}
                         userChoice={this.state.userChoice} />
+                    <div className="button-div">
+
+                    </div>
                 </div>
             );
         }
