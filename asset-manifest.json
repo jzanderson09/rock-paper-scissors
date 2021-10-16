@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/rock-paper-scissors/static/css/main.49251d4d.chunk.css",
+    "main.css": "/rock-paper-scissors/static/css/main.6c74bad3.chunk.css",
     "main.js": "/rock-paper-scissors/static/js/main.983a4f47.chunk.js",
     "main.js.map": "/rock-paper-scissors/static/js/main.983a4f47.chunk.js.map",
     "runtime-main.js": "/rock-paper-scissors/static/js/runtime-main.8e6b5730.js",
@@ -10,7 +10,7 @@
     "static/js/3.1fb52dd9.chunk.js": "/rock-paper-scissors/static/js/3.1fb52dd9.chunk.js",
     "static/js/3.1fb52dd9.chunk.js.map": "/rock-paper-scissors/static/js/3.1fb52dd9.chunk.js.map",
     "index.html": "/rock-paper-scissors/index.html",
-    "static/css/main.49251d4d.chunk.css.map": "/rock-paper-scissors/static/css/main.49251d4d.chunk.css.map",
+    "static/css/main.6c74bad3.chunk.css.map": "/rock-paper-scissors/static/css/main.6c74bad3.chunk.css.map",
     "static/js/2.2abc25af.chunk.js.LICENSE.txt": "/rock-paper-scissors/static/js/2.2abc25af.chunk.js.LICENSE.txt",
     "static/media/paper.d6290310.jpg": "/rock-paper-scissors/static/media/paper.d6290310.jpg",
     "static/media/rock.778a4ead.jpg": "/rock-paper-scissors/static/media/rock.778a4ead.jpg",
@@ -19,7 +19,7 @@
   "entrypoints": [
     "static/js/runtime-main.8e6b5730.js",
     "static/js/2.2abc25af.chunk.js",
-    "static/css/main.49251d4d.chunk.css",
+    "static/css/main.6c74bad3.chunk.css",
     "static/js/main.983a4f47.chunk.js"
   ]
 }
