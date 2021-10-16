@@ -183,8 +183,10 @@ class Game extends Component {
                         matchOver={this.state.matchOver}
                         play={this.state.play}
                         userChoice={this.state.userChoice} />
-                    <button className="next-match" 
+                    <div className="button-div">
+                        <button className="next-match" 
                         onClick={() => this.startNewMatch()}>Play</button>
+                    </div>
                 </div>
             );
         }
@@ -202,6 +204,9 @@ class Game extends Component {
                         play={this.state.play}
                         userChoice={this.state.userChoice}
                         userChoose={this.userChoose} />
+                    <div className="button-div">
+
+                    </div>
                 </div>
             );         
         }
