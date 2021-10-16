@@ -20,65 +20,34 @@ class Game extends Component {
                 { name: 'paper', src: paper },
                 { name: 'scissors', src: scissors }
             ],
-            computerChoice: {},
-            computerScore: 0,
-            currentRound: 1,
-            maxRounds: 1,
-            play: false,
-            userChoice: {},
-            userScore: 0,
-            winner: ''
+            computerChoice: { },
+            userChoice: { }
         };
         this.advanceRound = this.advanceRound.bind(this);
         this.computerChoose = this.computerChoose.bind(this);
         this.determineMatchWinner = this.determineMatchWinner.bind(this);
+        this.finishMatch = this.finishMatch.bind(this);
+        this.setStartValues = this.setStartValues.bind(this);
+        this.startNewMatch = this.startNewMatch.bind(this);
         this.startPlay = this.startPlay.bind(this);
+        this.updateScores = this.updateScores.bind(this);
         this.userChoose = this.userChoose.bind(this);
     }
 
     componentDidMount() {
-        const computerChoice = this.computerChoose();
-        let maxRounds = 1;
-        let result = window.prompt('How many rounds would you like to play?', 1);
-        if (result === null) {
-            result = 1;
-        }
-        maxRounds = result;
-        console.log(maxRounds);
-        this.setState({
-            computerChoice,
-            computerScore: 0,
-            currentRound: 1,
-            maxRounds: parseInt(maxRounds),
-            play: false,
-            userChoice: {},
-            userScore: 0
-        });
+        this.setStartValues();
     }
 
-    // If final round, determines/returns match winner.  If not, round is incremented:
+    // If final round, determines/alerts match winner and resets values.  If not, round is incremented:
     advanceRound() {
         if (this.state.currentRound >= this.state.maxRounds) {
-            const winner = this.determineMatchWinner();
-            if (winner === 'tie') {
-                const tiedScore = this.state.computerScore;
-                window.alert(`Both players tie the match with ${tiedScore} point(s)! Thank you for playing!`);
-            }
-            else {
-                if (winner === 'computer') {
-                    window.alert(`The ${winner} won the match with ${this.state.computerScore} point(s)!  Thank you for playing!`);
-                }
-                else if (winner === 'user') {
-                    window.alert(`The ${winner} won the match with ${this.state.userScore} point(s)!  Thank you for playing!`);
-                }
-            }
-            this.componentDidMount();
+            this.finishMatch();
+            this.setStartValues();
         }
         else {
-            const nextComputerChoice = this.computerChoose();
             this.setState({
+                computerChoice: {},
                 currentRound: this.state.currentRound + 1,
-                computerChoice: nextComputerChoice,
                 play: false,
                 userChoice: {}
             });
@@ -106,39 +75,137 @@ class Game extends Component {
         }
     }
 
+    // Determines match winner and alerts user:
+    finishMatch() {
+        const winner = this.determineMatchWinner();
+        if (winner === 'tie') {
+            const tiedScore = this.state.computerScore;
+            window.alert(`Both players tie the match with ${tiedScore} point(s)! Thank you for playing!`);
+        }
+        else {
+            if (winner === 'computer') {
+                window.alert(`The ${winner} won the match with ${this.state.computerScore} point(s)!  Thank you for playing!`);
+            }
+            else if (winner === 'user') {
+                window.alert(`You won the match with ${this.state.userScore} point(s)!  Thank you for playing!`);
+            }
+        }
+        this.componentDidMount();
+    }
+
+    // Sets values for start of new round:
+    setStartValues() {
+        this.setState({
+            computerChoice: {},
+            computerScore: 0,
+            currentRound: 0,
+            matchOver: true,
+            maxRounds: 0,
+            play: false,
+            userChoice: {},
+            userScore: 0
+        });
+    }
+
+    // Picks random computer choice, initializes values and picks x amount of rounds (optional user specified):
+    startNewMatch() {
+        let maxRounds = 1;
+        let result = parseInt(window.prompt('How many rounds would you like to play?', 1));
+        if (result === null) {
+            result = 1;
+        }
+        maxRounds = result;
+        this.setState({
+            currentRound: 1,
+            matchOver: false,
+            maxRounds
+        });
+    }
+
     // Evalutes winner, alerts user, increments round:
     startPlay() {
         const computer = this.state.computerChoice.name;
         const user = this.state.userChoice.name;
         const winner = evaluate(computer, user);
-        if (winner === 'tie') {
-            window.alert(`It's a tie! Both players picked ${computer}!`);
+        this.updateScores(winner);
+        this.advanceRound();
+    }
+
+    // Updates scores of roundWinner in state:
+    updateScores(roundWinner) {
+        if (roundWinner === 'tie') {
+            window.alert(`It's a tie! Both players picked ${this.state.computerChoice.name}!`);
         }
-        else if (winner === 'computer') {
-            window.alert(`The ${winner} won the round!`);
-            this.setState({ computerScore: this.state.computerScore + 1 });
+        else if (roundWinner === 'computer') {
+            window.alert(`The ${roundWinner} won the round!`);
+            this.setState({ 
+                computerScore: this.state.computerScore + 1
+            });
         }
         else {
-            window.alert(`The ${winner} won the round!`);
-            this.setState({ userScore: this.state.userScore + 1 });
+            window.alert('You won the round!');
+            this.setState({ 
+                userScore: this.state.userScore + 1
+            });
         }
-        this.advanceRound();
     }
 
     // Assigns choice to user, starts gameplay:
     userChoose(choiceIndex) {
         const choice = this.state.choices[choiceIndex];
         if (window.confirm(`Are you sure you want to pick ${choice.name}?`)) {
+            const computerChoice = this.computerChoose();
             this.setState({ 
-                userChoice: {...choice},
-                play: true
+                userChoice: choice,
+                computerChoice,
+                play: true,
+                matchOver: false
             });
-            setTimeout(() => this.startPlay(), 2000);
+            this.timerHandle = setTimeout(() => this.startPlay(), 1500);
         }
     }
 
+    componentWillUnmount() {
+        clearTimeout(this.timerHandle);
+    }
+
     render() {
-        if (this.state.play) {
+        if (!this.state.play && this.state.matchOver) {
+            return (
+                <div className='game'>
+                    <Scoreboard 
+                        computerScore={this.state.computerScore}
+                        currentRound={this.state.currentRound}
+                        maxRounds={this.state.maxRounds}
+                        userScore={this.state.userScore} />
+                    <Computer play={this.state.play} />
+                    <User 
+                        matchOver={this.state.matchOver}
+                        play={this.state.play}
+                        userChoice={this.state.userChoice} />
+                    <button className="next-match" 
+                        onClick={() => this.startNewMatch()}>Play</button>
+                </div>
+            );
+        }
+        else if (!this.state.play && !this.state.matchOver) {
+            return (
+                <div className='game'>
+                    <Scoreboard 
+                        computerScore={this.state.computerScore}
+                        currentRound={this.state.currentRound}
+                        maxRounds={this.state.maxRounds}
+                        userScore={this.state.userScore} />
+                    <Computer play={this.state.play} />
+                    <User 
+                        matchOver={this.state.matchOver}
+                        play={this.state.play}
+                        userChoice={this.state.userChoice}
+                        userChoose={this.userChoose} />
+                </div>
+            );         
+        }
+        else {
             return (
                 <div className='game'>
                     <Scoreboard 
@@ -150,25 +217,9 @@ class Game extends Component {
                         choice={this.state.computerChoice}
                         play={this.state.play} />
                     <User 
-                        userChoice={this.state.userChoice}
-                        userChoose={this.userChoose}
-                        play={this.state.play} />
-                </div>
-            );
-        }
-        else {
-            return (
-                <div className='game'>
-                    <Scoreboard 
-                        computerScore={this.state.computerScore}
-                        currentRound={this.state.currentRound}
-                        maxRounds={this.state.maxRounds}
-                        userScore={this.state.userScore} />
-                    <Computer play={this.state.play} />
-                    <User 
-                        userChoice={this.state.userChoice}
-                        userChoose={this.userChoose}
-                        play={this.state.play} />
+                        matchOver={this.state.matchOver}
+                        play={this.state.play}
+                        userChoice={this.state.userChoice} />
                 </div>
             );
         }
