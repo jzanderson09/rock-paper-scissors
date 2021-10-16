@@ -116,7 +116,7 @@ class Game extends Component {
             if (result === null) {
                 result = 1;
             }
-        } while (isNaN(result));
+        } while ( (result === null) || isNaN(result));
         maxRounds = result;
         this.setState({
             currentRound: 1,
@@ -181,7 +181,9 @@ class Game extends Component {
                         currentRound={this.state.currentRound}
                         maxRounds={this.state.maxRounds}
                         userScore={this.state.userScore} />
-                    <Computer play={this.state.play} />
+                    <Computer 
+                        play={this.state.play}
+                        matchOver={this.state.matchOver} />
                     <User 
                         matchOver={this.state.matchOver}
                         play={this.state.play}
@@ -201,7 +203,9 @@ class Game extends Component {
                         currentRound={this.state.currentRound}
                         maxRounds={this.state.maxRounds}
                         userScore={this.state.userScore} />
-                    <Computer play={this.state.play} />
+                    <Computer 
+                        play={this.state.play} 
+                        matchOver={this.state.matchOver} />
                     <User 
                         matchOver={this.state.matchOver}
                         play={this.state.play}
@@ -223,6 +227,7 @@ class Game extends Component {
                         userScore={this.state.userScore} />
                     <Computer 
                         choice={this.state.computerChoice}
+                        matchOver={this.state.matchOver}
                         play={this.state.play} />
                     <User 
                         matchOver={this.state.matchOver}

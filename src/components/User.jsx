@@ -1,18 +1,18 @@
-import React from 'react';
+import React from "react";
 
 const User = props => {
     if (!props.play && props.matchOver) {
         return (
             <div className="player">
-                <h3>User!</h3>
+                <h3 className="banner">User!</h3>
             </div>
         );
     }
     else if (!props.play && !props.matchOver) {
         return (
             <div 
-                className="player user">
-                <h3>User!</h3>
+                className="player choices">
+                <h3 className="banner">User!</h3>
                 <input 
                     className="choice-btn"
                     onClick={() => props.userChoose(0)}
@@ -34,10 +34,11 @@ const User = props => {
     else {
         return (
             <div className="player">
-                <h3>User!</h3>
+                <h3 className="banner">User!</h3>
                 <img 
+                    className="choice-img"
                     src={props.userChoice.src}
-                    alt='user choice'
+                    alt="user choice"
                 />
             </div>
         );

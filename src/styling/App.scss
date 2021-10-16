@@ -1,30 +1,38 @@
 // Mixins [may add to own file later]:
-@mixin rounded-shadow-borders {
+@mixin rounded-shadow-borders() {
   border: 2px outset black;
   border-radius: 10%;
   box-shadow: 2px 2px 2px 2px black;
 }
 
-@mixin cancel-rounded-shadow-borders {
-  border: none;
-  border-radius: none;
-  box-shadow: none;
+@mixin textShadows {
+  text-shadow: 1px 1px 1px black;
 }
+
+//Variables:
+$app-background: rgba(100, 120, 120, 0.7);
+$game-background: rgba(2, 61, 170, 0.7);
 
 * {
   box-sizing: border-box;
+  font-family:'Courier New', Courier, monospace, serif;
+  @include textShadows();
 }
 
 .App {
+  background-color: $app-background;
+  color: whitesmoke;
+  width: 100%;
+  height: 100vh;
+  margin: auto;
   text-align: center;
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
   align-items: center;
-  @include rounded-shadow-borders();
-  h1 {
-    border: 1px solid red;
+  #app-banner {
     display: block;
+    background-color: $game-background;
     width: 80%;
     @include rounded-shadow-borders();
   }
