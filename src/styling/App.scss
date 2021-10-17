@@ -1,42 +1,5 @@
-// Mixins [may add to own file later]:
-@mixin rounded-shadow-borders($color, $pixels, $percent) {
-  border: $pixels $pixels $pixels outset $color;
-  border-radius: $percent;
-  box-shadow: $pixels $pixels $pixels black;
-}
-
-@mixin textShadows($px, $color) {
-  text-shadow: $px $px $px $color;
-}
-
-@mixin buttonize($background, $foreground) {
-  background: $background;
-  color: $foreground;
-  &:hover {
-    background: $foreground;
-    color: $background;
-    cursor: pointer;
-  }
-  &:active {
-    background: $select-background;
-    color: $select-color;
-  }
-}
-
-//Variables:
-$app-background: rgba(100, 120, 120, 0.7);
-$choose-button-background: black;
-$choose-button-foreground: whitesmoke;
-$play-button-background: steelblue;
-$play-button-foreground: whitesmoke;
-$game-background: rgba(2, 61, 170, 0.7);
-$main-color: black;
-$main-px: 10px;
-$main-percent: 20%;
-$main-weight: 20%;
-$select-background: rgba(255, 255, 255, 0.3);
-$select-color: rba(0, 0, 0, 0.3); 
-$loading-text: greenyellow;
+@import './Mixins.scss';
+@import './Variables.scss';
 
 * {
   box-sizing: border-box;
