@@ -1,0 +1,24 @@
+//Mixins: 
+@mixin rounded-shadow-borders($color, $pixels, $percent) {
+    border: $pixels $pixels $pixels outset $color;
+    border-radius: $percent;
+    box-shadow: $pixels $pixels $pixels black;
+  }
+  
+  @mixin textShadows($px, $color) {
+    text-shadow: $px $px $px $color;
+  }
+  
+  @mixin buttonize($background, $foreground) {
+    background: $background;
+    color: $foreground;
+    &:hover {
+      background: $foreground;
+      color: $background;
+      cursor: pointer;
+    }
+    &:active {
+      background: $select-background;
+      color: $select-color;
+    }
+  }

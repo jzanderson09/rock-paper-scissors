@@ -1,16 +1,11 @@
+import Game from './components/Game';
 import './styling/App.scss';
-
-import Rock from './components/Rock';
-import Paper from './components/Paper';
-import Scissors from './components/Scissors';
 
 function App() {
   return (
     <div className="App">
-      <h1>App!</h1>
-      <Rock value='rock' />
-      <Paper value='paper' />
-      <Scissors value='scissors' />
+      <h1 id="app-banner">Rock ∞ Paper ∞ Scissors</h1>
+      <Game />
     </div>
   );
 }
