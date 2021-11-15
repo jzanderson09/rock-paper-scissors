@@ -1,12 +1,6 @@
 @import './Mixins.scss';
 @import './Variables.scss';
 
-* {
-  box-sizing: border-box;
-  font-family:'Courier New', Courier, monospace, serif;
-  @include textShadows($main-weight, $main-color);
-}
-
 .App {
   background-color: $app-background;
   color: whitesmoke;

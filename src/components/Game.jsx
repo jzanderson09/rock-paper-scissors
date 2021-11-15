@@ -15,11 +15,7 @@ class Game extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            choices: [
-                { name: 'rock', src: rock },
-                { name: 'paper', src: paper },
-                { name: 'scissors', src: scissors }
-            ],
+            choices: [ ],
             computerChoice: { },
             userChoice: { }
         };
@@ -96,11 +92,16 @@ class Game extends Component {
     // 1)/7) Sets values for start of new round:
     setStartValues() {
         this.setState({
-            computerChoice: {},
+            choices: [
+                { name: 'rock', src: rock },
+                { name: 'paper', src: paper },
+                { name: 'scissors', src: scissors }
+            ],
+            computerChoice: { },
             computerScore: 0,
             currentRound: 0,
             matchOver: true,
-            maxRounds: 0,
+            maxRounds: 1,
             play: false,
             userChoice: {},
             userScore: 0
